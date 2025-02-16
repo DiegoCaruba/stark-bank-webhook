@@ -44,7 +44,8 @@ INSTALLED_APPS = [
     # External Packages
     'rest_framework', 
     'celery', 
-    'django_celery_beat', 
+    'django_celery_beat',
+    'django_extensions'
 ]
 
 MIDDLEWARE = [
@@ -129,3 +130,6 @@ STATIC_URL = 'static/'
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+# Celery Broker URL
+CELERY_BROKER_URL = 'redis://localhost:6379/0'
