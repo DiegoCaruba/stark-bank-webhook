@@ -25,12 +25,6 @@ def create_random_invoices(
 
     for _ in range(random.randint(min_count, max_count)):
         invoice = generate_random_invoice()
-        # print(
-        #   f"""[+] Generated invoice ...
-        #     Tax ID: {invoice.tax_id}
-        #     Name: {invoice.name}
-        #     Amount: {invoice.amount}\n"""
-        #       )
         invoices.append(invoice)
 
     return create_invoices(invoices)
