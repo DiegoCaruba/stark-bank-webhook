@@ -65,9 +65,10 @@ def listen_webhook():
         return "", 405
 
     obj = request.json
+    # print(f"{obj=}")
     if obj.get("event", {}).get("subscription") == "invoice":
         if obj.get("event", {}).get("log", {}).get("type") == "paid":
-            print(obj.get("event", {}).get("log", {}).get("name", {}))
+            # print(obj.get("event", {}).get("log", {}).get("name", {}))
             transfer_invoice(obj)
             
     return "OK"
@@ -114,21 +115,21 @@ def get_invoices():
 
 
 def transfer_invoice(obj):
+    print(f"Transfer = {obj}")
+    # transfers = starkbank.transfer.create([
+    #     starkbank.Transfer(
+    #         amount=obj.event.log.invoice.amount,
+    #         tax_id="20.018.183/0001-80",
+    #         name="Stark Bank S.A.",
+    #         bank_code="20018183",
+    #         branch_code="0001",
+    #         account_number="6341320293482496",
+    #         account_type="payment"
+    #     )
+    # ])
 
-    transfers = starkbank.transfer.create([
-        starkbank.Transfer(
-            amount=obj.event.log.invoice.amount,
-            tax_id="20.018.183/0001-80",
-            name="Stark Bank S.A.",
-            bank_code="20018183",
-            branch_code="0001",
-            account_number="6341320293482496",
-            account_type="payment"
-        )
-    ])
-
-    for transfer in transfers:
-        print("[+] Transfer completed: ", transfer)
+    # for transfer in transfers:
+        # print("[+] Transfer completed: ", transfer)
 
 
 
@@ -137,10 +138,11 @@ def transfer_invoice(obj):
 if __name__ == "__main__":
     setup_webhook(webhook_url)
     
-    schedule.every(3).hours.do(random_invoices)
-    stop_run_jobs = run_jobs()
+    # schedule.every(3).hours.do(random_invoices)
+    # stop_run_jobs = run_jobs()
+    random_invoices()
     # get_invoices()
     app.run()
-    stop_run_jobs.set()
+    # stop_run_jobs.set()
     
     
