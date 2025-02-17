@@ -5,6 +5,7 @@ from django.core.handlers.wsgi import WSGIRequest
 from django.views.decorators.csrf import csrf_exempt
 
 from ..models import Invoice
+from ..services.service import transfer_amount
     
 
 @csrf_exempt
@@ -26,3 +27,13 @@ def webhook(request: WSGIRequest) -> JsonResponse:
         
         except Invoice.DoesNotExist:
             return JsonResponse({"message": "Invoice not found"}, status=404)
+
+
+@csrf_exempt
+def webhook_received(request: WSGIRequest) -> JsonResponse:
+    data = json.loads(request.body)
+
+    if data["status"] == "paid":
+        transfer_amount("amount")
+
+    return JsonResponse({"message": "Success"}, status=200)

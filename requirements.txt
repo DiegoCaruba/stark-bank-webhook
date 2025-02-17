@@ -12,6 +12,7 @@ colorama==0.4.6
 cron-descriptor==1.4.5
 Django==5.1.6
 django-celery-beat==2.7.0
+django-extensions==3.2.3
 django-timezone-field==7.1
 djangorestframework==3.15.2
 idna==3.10
@@ -19,6 +20,7 @@ kombu==5.4.2
 prompt_toolkit==3.0.50
 python-crontab==3.2.0
 python-dateutil==2.9.0.post0
+redis==5.2.1
 requests==2.32.3
 six==1.17.0
 sqlparse==0.5.3
