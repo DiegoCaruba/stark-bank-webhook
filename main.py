@@ -6,6 +6,9 @@ import random
 import threading
 import schedule
 import time
+import os
+from dotenv import load_dotenv
+load_dotenv()
 
 
 def run_jobs(interval=1):
@@ -23,12 +26,12 @@ def run_jobs(interval=1):
     return cease_continuous_run
 
 
-webhook_url = "https://9f9e-179-101-239-172.ngrok-free.app/webhook"
-# webhook_url = "https://db74-2804-7f0-18-9d9-50fe-3875-8c50-8570.ngrok-free.app/webhook"
+webhook_url = os.getenv("WEBHOOK_URL")
+
 user = starkbank.Project(
-    environment="sandbox",
-    id="6311638751772672",
-    private_key=open("privateKey.pem").read(),
+    environment=os.getenv("STARKBANK_ENVIRONMENT"),
+    id=os.getenv("SANDBOX_PROJECT_ID"),
+    private_key=open(os.getenv("PRIVATE_KEY_PATH")).read(),
 )
 starkbank.user = user
 
@@ -118,13 +121,13 @@ def transfer_invoice(obj):
     print(f"Transfer = {obj}")
     # transfers = starkbank.transfer.create([
     #     starkbank.Transfer(
-    #         amount=obj.event.log.invoice.amount,
-    #         tax_id="20.018.183/0001-80",
-    #         name="Stark Bank S.A.",
-    #         bank_code="20018183",
-    #         branch_code="0001",
-    #         account_number="6341320293482496",
-    #         account_type="payment"
+    #         amount = obj.event.log.invoice.amount,
+    #         tax_id = os.getenv("ACCOUNT_TAX_ID")",
+    #         name = os.getenv("ACCOUNT_NAME"),
+    #         bank_code = os.getenv("ACCOUNT_BANK_CODE"),
+    #         branch_code = os.getenv("ACCOUNT_BRANCH_CODE"),
+    #         account_number =  os.getenv("ACCOUNT_NUMBER"),
+    #         account_type = os.getenv("ACCOUNT_TYPE")
     #     )
     # ])
 
