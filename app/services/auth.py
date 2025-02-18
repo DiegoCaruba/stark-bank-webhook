@@ -1,5 +1,5 @@
 import starkbank
-from config import environment, project_id, private_key
+from ..config import environment, project_id, private_key
 
 user = starkbank.Project(
     environment=environment,

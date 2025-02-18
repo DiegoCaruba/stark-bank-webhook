@@ -1,4 +1,4 @@
-from auth import starkbank
+from .auth import starkbank
 
 
 def generate_invoice(

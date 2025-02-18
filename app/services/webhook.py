@@ -1,8 +1,8 @@
 from flask import jsonify, request
 
-from app import app
-from auth import starkbank
-from transfer import transfer_from_invoice
+from ..app import app
+from .auth import starkbank
+from .transfer import transfer_from_invoice
 
 
 def setup_webhook(url: str) -> None:

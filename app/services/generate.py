@@ -2,8 +2,8 @@ import names
 import random
 from pycpfcnpj import gen as docgen
 
-from auth import starkbank
-from invoices import create_invoices, generate_invoice
+from .auth import starkbank
+from .invoices import create_invoices, generate_invoice
 
 
 def generate_random_invoice() -> starkbank.Invoice:
@@ -26,5 +26,6 @@ def create_random_invoices(
     for _ in range(random.randint(min_count, max_count)):
         invoice = generate_random_invoice()
         invoices.append(invoice)
-
+        break
+    
     return create_invoices(invoices)

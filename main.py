@@ -1,10 +1,10 @@
 import schedule
-from scheduler import run_jobs
 
-from app import app
-from config import webhook_url
-from webhook import setup_webhook
-from generate import create_random_invoices
+from app.app import app
+from app.config import webhook_url
+from app.services.scheduler import run_jobs
+from app.services.webhook import setup_webhook
+from app.services.generate import create_random_invoices
 
 
 def run():

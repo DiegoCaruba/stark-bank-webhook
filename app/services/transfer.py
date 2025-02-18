@@ -1,5 +1,5 @@
-from auth import starkbank
-from config import destination_account
+from .auth import starkbank
+from ..config import destination_account
 
 
 def transfer_from_invoice(event: starkbank.Event) -> list[starkbank.Transfer]:
