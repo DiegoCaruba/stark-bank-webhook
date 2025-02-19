@@ -9,13 +9,18 @@ plugins:
   - serverless-python-requirements
 custom:
   wsgi:
-    app: app.app.app
+    app: main.app
     packRequirements: false
 functions:
   webhook:
     handler: wsgi_handler.handler
     events: 
-      - http: POST
+      - http: POST /
       - http: 'POST {proxy+}'
-    layers: 
-      - {Ref: PythonRequirementsLambdaLayer}
+  generate_random_data:
+    handler: app.lambda_scheduler.lambda_handler
+    events:
+      - schedule:
+          rate: rate(3 hours)
+          enabled: true
+useDotenv: true
