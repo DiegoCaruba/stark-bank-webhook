@@ -175,6 +175,6 @@ cython_debug/
 *.pem
 
 # AWS files
-.serverless
+.serverless/
 .serverless/*
 .serverless\*
