@@ -25,6 +25,23 @@ def setup_webhook(url: str) -> None:
         starkbank.webhook.create(url=url, subscriptions=["invoice"])
 
 
+def handle_event(event):
+    # Handle invoices
+    if event.subscription == "invoice":
+
+        # Handle paid invoices
+        if event.log.type == "paid":
+            transfer_from_invoice(event)
+
+
+def parse_event(content, signature):
+    return starkbank.event.parse(
+        content=content,
+        # Verify the event signature to ensure it was sent by Stark Bank
+        signature=signature,
+    )
+
+
 @app.route("/webhook", methods=["POST"])
 def listen_webhook() -> tuple[str, int]:
     """Listens for webhook events"""
@@ -34,25 +51,16 @@ def listen_webhook() -> tuple[str, int]:
             jsonify(
                 {
                     "error": "invalid Content-Type, expected application/json",
-                    "status_code": 405,
+                    "status_code": 415,
                 }
             ),
-            405,
+            415,
         )
 
-    event = starkbank.event.parse(
-        content=request.data.decode("utf-8"),
-        # Verify the event signature to ensure it was sent by Stark Bank
-        signature=request.headers.get("Digital-Signature"),
-    )
+    event = parse_event(request.data.decode("utf-8"), request.headers.get("Digital-Signature"))
 
     print(f"[*] Got event: Subscription: {event.subscription}, Type: {event.log.type}")
 
-    # Handle invoices
-    if event.subscription == "invoice":
-
-        # Handle paid invoices
-        if event.log.type == "paid":
-            transfer_from_invoice(event)
+    handle_event(event)
 
     return jsonify({"status_code": 200, "message": "OK"}), 200
