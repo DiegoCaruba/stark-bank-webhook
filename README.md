@@ -65,20 +65,36 @@ The project consists of:
 
 2. **Install Serverless CLI and Python dependencies:**
 
-   ```bash
-   make setup
-   ```
+  ```bash
+  make setup     # For Unix-based systems
+  make setup-win # For Windows
+  ```
 
 ## Usage
 
-### Local Mode
+### Environment Configuration
+1. It is necessary be have access to STARK BANK API
+2. Create a project and fetch 'ID do projeto'
+3. Obtain a public and private key at STARK BANK API
+4. Set app/config.py
+  - The project_id variable must receive 'ID do projeto'
+  - Allocate your privateKey.pem file and set private_key variable with file path
+  - Set webhook_url with a valid URL
 
-For local testing and development, run:
+#### Running Local Mode:
   - It may be necessary to use a tool that creates secure tunnels from the internet to your local machine, such as Ngrok
   - The public URL must be replace webhook_url value at app/config.py
 
+#### Running AWS with Serverless Framework
+  - The first time you run Serverless, it will be given an AWS URL
+  - Set webhook_url with this URL and run the deploy command again
+
+### Local Mode
+
+Start the application with the following:
 ```bash
-make run
+make run     # For Unix-based systems
+make run-win # For Windows
 ```
 
 This starts a Flask server and the local scheduler will trigger invoice generation every 3 hours (with an immediate run at start).
@@ -88,7 +104,8 @@ This starts a Flask server and the local scheduler will trigger invoice generati
 Deploy the application to AWS using the Serverless Framework:
 
 ```bash
-make deploy
+make deploy     # For Unix-based systems
+make deploy-win # For Windows
 ```
 
 AWS CloudWatch events replace the local scheduler for triggering the scheduled function.
@@ -124,18 +141,11 @@ Run the test suite with:
 - It is necessary to create 'tests/test_private_key.pem' file with a valid private-key to run all tests suites
 
 ```bash
-make test
+make test     # For Unix-based systems
+make test-win # For Windows
 ```
 
 This will execute unit tests for invoice generation, invoice creation, and webhook setup.
-
-## Deployment
-
-Deploy the application to AWS with:
-
-```bash
-make deploy
-```
 
 ## License
 
