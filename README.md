@@ -65,9 +65,10 @@ The project consists of:
 
 2. **Install Serverless CLI and Python dependencies:**
 
-   ```bash
-   make setup
-   ```
+  ```bash
+  make setup     # For Unix-based systems
+  make setup-win # For Windows
+  ```
 
 ## Usage
 
@@ -92,7 +93,8 @@ The project consists of:
 
 Start the application with the following:
 ```bash
-make run
+make run     # For Unix-based systems
+make run-win # For Windows
 ```
 
 This starts a Flask server and the local scheduler will trigger invoice generation every 3 hours (with an immediate run at start).
@@ -102,7 +104,8 @@ This starts a Flask server and the local scheduler will trigger invoice generati
 Deploy the application to AWS using the Serverless Framework:
 
 ```bash
-make deploy
+make deploy     # For Unix-based systems
+make deploy-win # For Windows
 ```
 
 AWS CloudWatch events replace the local scheduler for triggering the scheduled function.
@@ -138,7 +141,8 @@ Run the test suite with:
 - It is necessary to create 'tests/test_private_key.pem' file with a valid private-key to run all tests suites
 
 ```bash
-make test
+make test     # For Unix-based systems
+make test-win # For Windows
 ```
 
 This will execute unit tests for invoice generation, invoice creation, and webhook setup.
