@@ -26,6 +26,5 @@ def create_random_invoices(
     for _ in range(random.randint(min_count, max_count)):
         invoice = generate_random_invoice()
         invoices.append(invoice)
-        break
     
     return create_invoices(invoices)
