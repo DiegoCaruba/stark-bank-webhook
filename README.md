@@ -121,6 +121,7 @@ AWS CloudWatch events replace the local scheduler for triggering the scheduled f
 ## Testing
 
 Run the test suite with:
+- It is necessary to create 'tests/test_private_key.pem' file with a valid private-key to run all tests suites
 
 ```bash
 make test
