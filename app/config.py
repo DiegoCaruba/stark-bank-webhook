@@ -1,7 +1,7 @@
 environment = "sandbox"
 project_id = "6311638751772672"
 private_key = "privateKey.pem"
-webhook_url = "https://97dd-2804-7f0-18-e89-50fe-3875-8c50-8570.ngrok-free.app/webhook"
+webhook_url = "https://v264v4teoa.execute-api.us-east-1.amazonaws.com/dev/webhook"
 
 destination_account = {
     "tax_id": "20.018.183/0001-80",
