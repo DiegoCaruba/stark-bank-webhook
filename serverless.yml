@@ -17,10 +17,11 @@ functions:
     events: 
       - http: POST /
       - http: 'POST {proxy+}'
-  generate_random_data:
+  generate-random-data:
     handler: app.lambda_scheduler.lambda_handler
     events:
       - schedule:
-          rate: rate(3 hours)
+          rate: rate(3 minutes)
           enabled: true
 useDotenv: true
+packRequirements: true

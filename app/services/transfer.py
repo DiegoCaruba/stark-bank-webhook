@@ -1,5 +1,6 @@
-from .auth import starkbank
-from ..config import destination_account
+from app.services.auth import starkbank
+from app.services.logger import logger
+from app.config import destination_account
 
 
 def transfer_from_invoice(event: starkbank.Event) -> list[starkbank.Transfer]:
@@ -16,7 +17,7 @@ def transfer_from_invoice(event: starkbank.Event) -> list[starkbank.Transfer]:
     transfers = starkbank.transfer.create([transfer])
 
     for transfer in transfers:
-        print(
+        logger.info(
             f"""[+] Transfer created ...
     ID: #{transfer.id}
     Invoice ID: #{invoice.id}

@@ -1,8 +1,9 @@
 from flask import jsonify, request
 
-from ..app import app
-from .auth import starkbank
-from .transfer import transfer_from_invoice
+from app.app import app
+from app.services.logger import logger
+from app.services.auth import starkbank
+from app.services.transfer import transfer_from_invoice
 
 
 def setup_webhook(url: str) -> None:
@@ -12,12 +13,12 @@ def setup_webhook(url: str) -> None:
 
     for webhook in webhooks:
         if webhook.url == url and "invoice" in webhook.subscriptions:
-            print("[+] Webhook is already configured ...")
+            logger.info("[+] Webhook is already configured ...")
             found = True
             break
 
     if not found:
-        print(
+        logger.info(
             f"""[*] Creating webhook ...
     URL: {url}
     Subscriptions: ["invoice"]\n"""
@@ -59,7 +60,7 @@ def listen_webhook() -> tuple[str, int]:
 
     event = parse_event(request.data.decode("utf-8"), request.headers.get("Digital-Signature"))
 
-    print(f"[*] Got event: Subscription: {event.subscription}, Type: {event.log.type}")
+    logger.info(f"[*] Got event: Subscription: {event.subscription}, Type: {event.log.type}")
 
     handle_event(event)
 
