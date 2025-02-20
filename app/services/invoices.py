@@ -1,4 +1,5 @@
-from .auth import starkbank
+from app.services.auth import starkbank
+from app.services.logger import logger
 
 
 def generate_invoice(
@@ -17,7 +18,7 @@ def create_invoices(invoices: list[starkbank.Invoice]) -> list[starkbank.Invoice
     returned_invoices = starkbank.invoice.create(invoices)
 
     for invoice in returned_invoices:
-        print(
+        logger.info(
             f"""[+] Created invoice ...
     ID: #{invoice.id}
     Tax ID: {invoice.tax_id}
