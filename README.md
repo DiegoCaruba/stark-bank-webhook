@@ -71,12 +71,26 @@ The project consists of:
 
 ## Usage
 
-### Local Mode
+### Environment Configuration
+1. It is necessary be have access to STARK BANK API
+2. Create a project and fetch 'ID do projeto'
+3. Obtain a public and private key at STARK BANK API
+4. Set app/config.py
+  - The project_id variable must receive 'ID do projeto'
+  - Allocate your privateKey.pem file and set private_key variable with file path
+  - Set webhook_url with a valid URL
 
-For local testing and development, run:
+#### Running Local Mode:
   - It may be necessary to use a tool that creates secure tunnels from the internet to your local machine, such as Ngrok
   - The public URL must be replace webhook_url value at app/config.py
 
+#### Running AWS with Serverless Framework
+  - The first time you run Serverless, it will be given an AWS URL
+  - Set webhook_url with this URL and run the deploy command again
+
+### Local Mode
+
+Start the application with the following:
 ```bash
 make run
 ```
@@ -128,14 +142,6 @@ make test
 ```
 
 This will execute unit tests for invoice generation, invoice creation, and webhook setup.
-
-## Deployment
-
-Deploy the application to AWS with:
-
-```bash
-make deploy
-```
 
 ## License
 
