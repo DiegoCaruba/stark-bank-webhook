@@ -21,7 +21,7 @@ functions:
     handler: app.lambda_scheduler.lambda_handler
     events:
       - schedule:
-          rate: rate(3 minutes)
+          rate: rate(3 hours)
           enabled: true
 useDotenv: true
 packRequirements: true
