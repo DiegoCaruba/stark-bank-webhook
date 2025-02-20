@@ -177,4 +177,4 @@ cython_debug/
 # AWS files
 .serverless/
 .serverless/*
-vendor/
+node_modules/
