@@ -74,6 +74,8 @@ The project consists of:
 ### Local Mode
 
 For local testing and development, run:
+  - It may be necessary to use a tool that creates secure tunnels from the internet to your local machine, such as Ngrok
+  - The public URL must be replace webhook_url value at app/config.py
 
 ```bash
 make run
@@ -119,6 +121,7 @@ AWS CloudWatch events replace the local scheduler for triggering the scheduled f
 ## Testing
 
 Run the test suite with:
+- It is necessary to create 'tests/test_private_key.pem' file with a valid private-key to run all tests suites
 
 ```bash
 make test
